@@ -1,11 +1,16 @@
 import express from "express";
 import mongoose from "mongoose";
+import * as dotenv from "dotenv";
+dotenv.config();
 import Job from "./Jobs.js";
 import cors from "cors";
 const app = express();
 app.use(express.json());
 app.use(cors());
 
+app.get("/test", async (req, res) => {
+  res.json({ msg: "test route" });
+});
 app.get("/", async (req, res) => {
   const Jobs = await Job.find();
   if (!Jobs) res.send("There is no works to do");
@@ -41,9 +46,8 @@ app.delete("/:id", async (req, res) => {
 });
 
 try {
-  await mongoose.connect(
-    "mongodb+srv://kulamani:Kulamani123@cluster0.7dxiurx.mongodb.net/TODOLIST?retryWrites=true&w=majority&appName=Cluster0"
-  );
+  // eslint-disable-next-line no-undef
+  await mongoose.connect(process.env.MONGOURL);
   app.listen(5000, () => {
     console.log("Server running on port 5000");
   });

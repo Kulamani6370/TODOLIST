@@ -8,12 +8,15 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "server": "nodemon server"
+    "server": "nodemon server",
+    "deploy": "concurrently --kill-others-on-fail \"npm run start\" \"npm run dev\""
   },
   "dependencies": {
     "@tanstack/react-query": "^5.51.11",
     "axios": "^1.7.2",
+    "concurrently": "^8.2.2",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "mongoose": "^8.5.1",
     "nanoid": "^5.0.7",
